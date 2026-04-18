@@ -1,0 +1,29 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter the first number:");
+        int num1 = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter the second number:");
+        int num2 = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("The sum is: " + (num1 + num2));
+        Console.WriteLine("The difference is: " + (num1 - num2));
+        Console.WriteLine("The product is: " + (num1 * num2));
+
+        try
+        {
+            if (num2 == 0)
+                throw new DivideByZeroException();
+            double quotient = (double)num1 / num2;
+            Console.WriteLine("The quotient is: " + quotient);
+        }
+        catch (DivideByZeroException)
+        {
+            Console.WriteLine("Error: Division by zero is not allowed.");
+        }
+    }
+}
