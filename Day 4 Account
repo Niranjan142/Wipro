@@ -1,0 +1,67 @@
+using System;
+
+class Account
+{
+    // Define properties
+    // Complete Step 1:............
+    public string AccountNumber { get; set; }
+    public decimal Balance { get; set; }
+    public string OwnerName { get; set; }
+
+    // Define methods
+    // Complete Step 2:............
+    public void Deposit(decimal amount)
+{
+    Balance += amount;
+    Console.WriteLine($"Deposited: ${amount:F2}");
+}
+
+public void Withdraw(decimal amount)
+{
+    if (amount <= Balance)
+    {
+        Balance -= amount;
+        Console.WriteLine($"Withdrew: ${amount:F2}");
+    }
+    else
+    {
+        Console.WriteLine("Insufficient balance");
+    }
+}
+
+public void DisplayBalance()
+{
+    Console.WriteLine($"Account Balance: ${Balance:F2}");
+}
+
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Prompt the user to enter account details
+        Console.WriteLine("Enter account number:");
+        // Complete Step 3:............
+        string accNumber = Console.ReadLine();
+
+        Console.WriteLine("Enter owner name:");
+        // Complete Step 4:............
+        string ownerName = Console.ReadLine();
+
+        // Create an instance of the Account class
+        // Complete Step 5:............
+        Account acc = new Account();
+        acc.AccountNumber = accNumber;
+        acc.OwnerName = ownerName;
+        acc.Balance = 0;
+
+        // Perform transactions
+        // Complete Step 6:............
+        acc.Deposit(100);
+        acc.DisplayBalance();
+
+        acc.Withdraw(50);
+        acc.DisplayBalance();
+    }
+}
