@@ -1,0 +1,85 @@
+using System;
+
+class Vehicle
+{
+    // Step 1: Define properties
+    public string Make { get; set; }
+    public string Model { get; set; }
+    public int Year { get; set; }
+
+    // Step 2: Constructor
+    public Vehicle(string make, string model, int year)
+    {
+        Make = make;
+        Model = model;
+        Year = year;
+    }
+
+    // Step 3: Virtual method
+    public virtual void GetInfo()
+    {
+        Console.WriteLine($"Vehicle: {Make} {Model}, Year: {Year}");
+    }
+}
+
+class Car : Vehicle
+{
+    // Constructor calling base class
+    public Car(string make, string model, int year) : base(make, model, year) {}
+
+    // Step 4: Override method
+    public override void GetInfo()
+    {
+        Console.WriteLine($"Car: {Year} {Make} {Model}");
+    }
+}
+
+class Motorcycle : Vehicle
+{
+    // Constructor calling base class
+    public Motorcycle(string make, string model, int year) : base(make, model, year) {}
+
+    // Step 5: Override method
+    public override void GetInfo()
+    {
+        Console.WriteLine($"Motorcycle: {Year} {Make} {Model}");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Step 6
+        Console.WriteLine("Enter car make:");
+        string carMake = Console.ReadLine();
+
+        // Step 7
+        Console.WriteLine("Enter car model:");
+        string carModel = Console.ReadLine();
+
+        // Step 8
+        Console.WriteLine("Enter car year:");
+        int carYear = int.Parse(Console.ReadLine());
+
+        // Step 9
+        Console.WriteLine("Enter motorcycle make:");
+        string bikeMake = Console.ReadLine();
+
+        // Step 10
+        Console.WriteLine("Enter motorcycle model:");
+        string bikeModel = Console.ReadLine();
+
+        // Step 11
+        Console.WriteLine("Enter motorcycle year:");
+        int bikeYear = int.Parse(Console.ReadLine());
+
+        // Step 12
+        Car car = new Car(carMake, carModel, carYear);
+        Motorcycle bike = new Motorcycle(bikeMake, bikeModel, bikeYear);
+
+        // Step 13
+        car.GetInfo();
+        bike.GetInfo();
+    }
+}
