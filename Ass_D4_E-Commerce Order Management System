@@ -1,0 +1,75 @@
+using System;
+using System.Collections.Generic;
+
+class Order
+{
+    public int OrderId;
+    public string ProductName;
+    public double Price;
+
+    public Order(int id, string name, double price)
+    {
+        OrderId = id;
+        ProductName = name;
+        Price = price;
+    }
+}
+
+class Customer
+{
+    public int CustomerId;
+    public string Name;
+
+    public Customer(int id, string name)
+    {
+        CustomerId = id;
+        Name = name;
+    }
+}
+
+class OrderManager
+{
+    List<Order> orders = new List<Order>();
+    Dictionary<int, Customer> customers = new Dictionary<int, Customer>();
+    HashSet<string> categories = new HashSet<string>();
+    Queue<Order> queue = new Queue<Order>();
+    Stack<string> history = new Stack<string>();
+
+    public void AddOrder(Order order)
+    {
+        orders.Add(order);
+        queue.Enqueue(order);
+        categories.Add(order.ProductName);
+        history.Push("Order Added");
+    }
+
+    public void ProcessOrder()
+    {
+        if (queue.Count > 0)
+        {
+            var order = queue.Dequeue();
+            Console.WriteLine($"Processing: {order.ProductName}");
+            history.Push("Order Processed");
+        }
+    }
+
+    public void ShowHistory()
+    {
+        foreach (var h in history)
+            Console.WriteLine(h);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        OrderManager om = new OrderManager();
+
+        om.AddOrder(new Order(1, "Laptop", 50000));
+        om.AddOrder(new Order(2, "Phone", 20000));
+
+        om.ProcessOrder();
+        om.ShowHistory();
+    }
+}
