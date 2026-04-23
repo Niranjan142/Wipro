@@ -1,0 +1,138 @@
+﻿using System;
+using System.Collections.Generic;
+
+// Order class
+class Order
+{
+    public int OrderId;
+    public string ProductName;
+    public double Price;
+
+    public Order(int id, string name, double price)
+    {
+        OrderId = id;
+        ProductName = name;
+        Price = price;
+    }
+}
+
+// Customer class
+class Customer
+{
+    public int CustomerId;
+    public string Name;
+
+    public Customer(int id, string name)
+    {
+        CustomerId = id;
+        Name = name;
+    }
+}
+
+class OrderSystem
+{
+    // Collections
+    private List<Order> orders = new List<Order>();
+    private Dictionary<int, Customer> customers = new Dictionary<int, Customer>();
+    private HashSet<string> categories = new HashSet<string>();
+    private Queue<Order> orderQueue = new Queue<Order>();
+    private Stack<string> statusStack = new Stack<string>();
+
+    // Add Customer
+    public void AddCustomer(Customer customer)
+    {
+        customers[customer.CustomerId] = customer;
+    }
+
+    // Add Order
+    public void AddOrder(Order order, string category)
+    {
+        orders.Add(order);
+        orderQueue.Enqueue(order);
+        categories.Add(category);
+        statusStack.Push("Order Placed");
+    }
+
+    // Update Order
+    public void UpdateOrder(int orderId, string newProduct, double newPrice)
+    {
+        foreach (var order in orders)
+        {
+            if (order.OrderId == orderId)
+            {
+                order.ProductName = newProduct;
+                order.Price = newPrice;
+                statusStack.Push("Order Updated");
+                break;
+            }
+        }
+    }
+
+    // Remove Order
+    public void RemoveOrder(int orderId)
+    {
+        orders.RemoveAll(o => o.OrderId == orderId);
+        statusStack.Push("Order Removed");
+    }
+
+    // Process Orders (FIFO)
+    public void ProcessOrders()
+    {
+        while (orderQueue.Count > 0)
+        {
+            var order = orderQueue.Dequeue();
+            Console.WriteLine($"Processing Order: {order.OrderId} - {order.ProductName}");
+            statusStack.Push("Order Processed");
+        }
+    }
+
+    // Show Status History (LIFO)
+    public void ShowStatusHistory()
+    {
+        Console.WriteLine("\nOrder Status History:");
+        foreach (var status in statusStack)
+        {
+            Console.WriteLine(status);
+        }
+    }
+
+    // Display Categories
+    public void ShowCategories()
+    {
+        Console.WriteLine("\nUnique Categories:");
+        foreach (var c in categories)
+        {
+            Console.WriteLine(c);
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        OrderSystem system = new OrderSystem();
+
+        // Add Customers
+        system.AddCustomer(new Customer(1, "John"));
+        system.AddCustomer(new Customer(2, "Alice"));
+
+        // Add Orders
+        system.AddOrder(new Order(101, "Laptop", 80000), "Electronics");
+        system.AddOrder(new Order(102, "Phone", 30000), "Electronics");
+        system.AddOrder(new Order(103, "Shoes", 2000), "Fashion");
+
+        // Update Order
+        system.UpdateOrder(102, "Smartphone", 35000);
+
+        // Remove Order
+        system.RemoveOrder(103);
+
+        // Process Orders
+        system.ProcessOrders();
+
+        // Show Data
+        system.ShowStatusHistory();
+        system.ShowCategories();
+    }
+}
