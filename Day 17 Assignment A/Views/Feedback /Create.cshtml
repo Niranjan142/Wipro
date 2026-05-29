@@ -1,0 +1,57 @@
+﻿@model CustomerFeedbackPortal.Models.Feedback
+
+<h2>Customer Feedback Form</h2>
+
+<form asp-action="Create" method="post">
+
+    <div>
+        <label>Name</label>
+
+        @Html.StyledInput("Name", "Enter your name")
+    </div>
+
+    <div>
+        <label>Email</label>
+
+        @Html.TextBoxFor(m => m.Email,
+                 new { @class = "form-control mb-3", placeholder = "Enter Email" })
+    </div>
+
+    <div>
+        <label>Rating</label>
+
+        @Html.DropDownListFor(m => m.Rating,
+            new List<SelectListItem>
+            {
+                new SelectListItem{ Text="1", Value="1"},
+                new SelectListItem{ Text="2", Value="2"},
+                new SelectListItem{ Text="3", Value="3"},
+                new SelectListItem{ Text="4", Value="4"},
+                new SelectListItem{ Text="5", Value="5"}
+            },
+            "Select Rating",
+            new { @class = "form-control mb-3" })
+    </div>
+
+    <div>
+        <label>Comments</label>
+
+        @Html.TextAreaFor(m => m.Comments,
+                 new { @class = "form-control mb-3", rows = 4 })
+    </div>
+
+    <div>
+        <rating-stars count="5"></rating-stars>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">
+        Submit Feedback
+    </button>
+
+</form>
+
+<br />
+
+<a asp-action="List">View Submitted Feedback</a>
