@@ -1,0 +1,43 @@
+﻿@page "{id?}"
+@model AdvancedRazorPagesApp.Pages.Products.IndexModel
+
+<h2>Add Product</h2>
+
+<form method="post">
+    <div>
+        <label>Product ID</label>
+        <input asp-for="NewProduct.ProductID" />
+    </div>
+
+    <div>
+        <label>Name</label>
+        <input asp-for="NewProduct.Name" />
+    </div>
+
+    <div>
+        <label>Description</label>
+        <input asp-for="NewProduct.Description" />
+    </div>
+
+    <button type="submit">Add Product</button>
+</form>
+
+<hr />
+
+<h2>Product List</h2>
+
+@foreach (var product in Model.Products)
+{
+    <div>
+        <partial name="_ProductSummary" model="product" />
+
+        <b>Categories:</b>
+
+        <ul>
+            @foreach (var category in product.Categories)
+            {
+                <li>@category.Name</li>
+            }
+        </ul>
+    </div>
+}
