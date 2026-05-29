@@ -1,0 +1,78 @@
+﻿@page
+@model RegistrationValidationSystem.Pages.RegisterModel
+
+<h2>User Registration</h2>
+
+<form method="post">
+
+    <div asp-validation-summary="All"
+         style="color:red">
+    </div>
+
+    <div>
+        <label>Username</label>
+
+        <input asp-for="UserRegistration.Username" />
+
+        <span asp-validation-for="UserRegistration.Username"
+              style="color:red">
+        </span>
+    </div>
+
+    <br />
+
+    <div>
+        <label>Email</label>
+
+        <input asp-for="UserRegistration.Email" />
+
+        <span asp-validation-for="UserRegistration.Email"
+              style="color:red">
+        </span>
+    </div>
+
+    <br />
+
+    <div>
+        <label>Password</label>
+
+        <input asp-for="UserRegistration.Password"
+               type="password" />
+
+        <span asp-validation-for="UserRegistration.Password"
+              style="color:red">
+        </span>
+    </div>
+
+    <br />
+
+    <div>
+        <label>Confirm Password</label>
+
+        <input asp-for="UserRegistration.ConfirmPassword"
+               type="password" />
+
+        <span asp-validation-for="UserRegistration.ConfirmPassword"
+              style="color:red">
+        </span>
+    </div>
+
+    <br />
+
+    <button type="submit">
+        Register
+    </button>
+
+</form>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <h3 style="color:green">
+        @Model.Message
+    </h3>
+}
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
