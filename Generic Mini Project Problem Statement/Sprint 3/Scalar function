@@ -1,0 +1,19 @@
+CREATE FUNCTION fn_CalculateBill
+(
+    @PatientID INT
+)
+RETURNS DECIMAL(10,2)
+AS
+BEGIN
+
+    DECLARE @Total DECIMAL(10,2);
+
+    SELECT @Total = SUM(Cost)
+    FROM Treatment T
+    JOIN Appointment A
+    ON T.AppointmentID=A.AppointmentID
+    WHERE A.PatientID=@PatientID;
+
+    RETURN ISNULL(@Total,0);
+
+END;
