@@ -1,0 +1,9 @@
+SELECT
+    P.PatientName,
+    D.DoctorName,
+    A.AppointmentDate
+FROM Appointment A
+INNER JOIN Patient P
+ON A.PatientID=P.PatientID
+INNER JOIN Doctor D
+ON A.DoctorID=D.DoctorID;
