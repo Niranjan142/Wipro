@@ -1,0 +1,9 @@
+SELECT PatientName
+FROM Patient
+WHERE PatientID IN
+(
+    SELECT PatientID
+    FROM Appointment
+    GROUP BY PatientID
+    HAVING COUNT(*) > 2
+);
