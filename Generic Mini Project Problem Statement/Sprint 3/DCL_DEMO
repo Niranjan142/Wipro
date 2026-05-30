@@ -1,2 +1,14 @@
 CREATE LOGIN Receptionist
 WITH PASSWORD='Password@123';
+
+
+GRANT SELECT, INSERT
+ON Patient
+TO Receptionist;
+
+REVOKE INSERT
+ON Patient
+FROM Receptionist;
+
+
+
