@@ -1,0 +1,95 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+
+[ApiController]
+[Route("api/notes")]
+[Authorize]
+public class NotesController : ControllerBase
+{
+    private readonly AppDbContext _context;
+
+    public NotesController(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    private int GetUserId()
+    {
+        return int.Parse(
+            User.FindFirst("UserId").Value);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddNote(Note note)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        note.UserId = GetUserId();
+
+        _context.Notes.Add(note);
+        await _context.SaveChangesAsync();
+
+        return Ok(new
+        {
+            message = "Note added successfully.",
+            noteId = note.Id
+        });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetNotes()
+    {
+        var notes = await _context.Notes
+            .Where(n => n.UserId == GetUserId())
+            .ToListAsync();
+
+        return Ok(notes);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateNote(
+        int id,
+        Note updatedNote)
+    {
+        var note = await _context.Notes
+            .FirstOrDefaultAsync(n =>
+                n.Id == id &&
+                n.UserId == GetUserId());
+
+        if (note == null)
+            return NotFound();
+
+        note.Title = updatedNote.Title;
+        note.Content = updatedNote.Content;
+
+        await _context.SaveChangesAsync();
+
+        return Ok(new
+        {
+            message = "Note updated successfully"
+        });
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteNote(int id)
+    {
+        var note = await _context.Notes
+            .FirstOrDefaultAsync(n =>
+                n.Id == id &&
+                n.UserId == GetUserId());
+
+        if (note == null)
+            return NotFound();
+
+        _context.Notes.Remove(note);
+        await _context.SaveChangesAsync();
+
+        return Ok(new
+        {
+            message = "Note deleted successfully"
+        });
+    }
+}
