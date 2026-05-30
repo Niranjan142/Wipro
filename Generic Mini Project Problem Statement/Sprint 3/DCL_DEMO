@@ -1,0 +1,2 @@
+CREATE LOGIN Receptionist
+WITH PASSWORD='Password@123';
