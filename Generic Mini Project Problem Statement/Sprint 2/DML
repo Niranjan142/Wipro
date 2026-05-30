@@ -1,0 +1,7 @@
+INSERT INTO Patient
+VALUES
+('Rahul','M','9876543210');
+
+INSERT INTO Patient
+VALUES
+('Anjali','F','9876543211');
