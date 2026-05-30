@@ -1,0 +1,14 @@
+CREATE VIEW vw_PatientHistory
+AS
+SELECT
+    P.PatientName,
+    D.DoctorName,
+    T.Description,
+    T.Cost
+FROM Patient P
+JOIN Appointment A
+ON P.PatientID=A.PatientID
+JOIN Doctor D
+ON A.DoctorID=D.DoctorID
+JOIN Treatment T
+ON A.AppointmentID=T.AppointmentID;
