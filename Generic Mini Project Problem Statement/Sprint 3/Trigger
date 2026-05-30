@@ -1,0 +1,18 @@
+CREATE TRIGGER trg_AuditAppointment
+ON Appointment
+AFTER UPDATE
+AS
+BEGIN
+
+    INSERT INTO AuditLog
+    (
+        Activity,
+        LogDate
+    )
+    VALUES
+    (
+        'Appointment Updated',
+        GETDATE()
+    );
+
+END;
