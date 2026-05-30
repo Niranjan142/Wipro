@@ -1,0 +1,7 @@
+BEGIN TRANSACTION;
+
+UPDATE Bill
+SET Amount = Amount + 1000
+WHERE BillID = 1;
+
+ROLLBACK;
