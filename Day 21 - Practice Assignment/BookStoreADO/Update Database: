@@ -1,0 +1,8 @@
+SqlDataAdapter adapter =
+    new SqlDataAdapter(
+        "SELECT * FROM Books", con);
+
+SqlCommandBuilder builder =
+    new SqlCommandBuilder(adapter);
+
+adapter.Update(ds, "Books");
