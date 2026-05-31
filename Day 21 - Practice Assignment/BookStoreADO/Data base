@@ -1,0 +1,14 @@
+CREATE DATABASE BookStoreDB;
+GO
+
+USE BookStoreDB;
+GO
+
+CREATE TABLE Books
+(
+    BookId INT PRIMARY KEY IDENTITY(1,1),
+    Title NVARCHAR(100),
+    Author NVARCHAR(100),
+    Price DECIMAL(10,2),
+    Quantity INT
+);
