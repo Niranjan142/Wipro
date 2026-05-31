@@ -1,0 +1,16 @@
+public DataSet GetBooksDataSet()
+{
+    DataSet ds = new DataSet();
+
+    using(SqlConnection con =
+        new SqlConnection(_connectionString))
+    {
+        SqlDataAdapter adapter =
+            new SqlDataAdapter(
+                "SELECT * FROM Books", con);
+
+        adapter.Fill(ds, "Books");
+    }
+
+    return ds;
+}
