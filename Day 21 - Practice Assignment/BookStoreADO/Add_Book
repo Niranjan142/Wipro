@@ -1,0 +1,12 @@
+CREATE PROCEDURE sp_AddBook
+(
+    @Title NVARCHAR(100),
+    @Author NVARCHAR(100),
+    @Price DECIMAL(10,2),
+    @Quantity INT
+)
+AS
+BEGIN
+    INSERT INTO Books
+    VALUES(@Title,@Author,@Price,@Quantity)
+END
