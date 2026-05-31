@@ -1,0 +1,18 @@
+CREATE PROCEDURE sp_UpdateBook
+(
+    @BookId INT,
+    @Title NVARCHAR(100),
+    @Author NVARCHAR(100),
+    @Price DECIMAL(10,2),
+    @Quantity INT
+)
+AS
+BEGIN
+    UPDATE Books
+    SET
+        Title=@Title,
+        Author=@Author,
+        Price=@Price,
+        Quantity=@Quantity
+    WHERE BookId=@BookId
+END
