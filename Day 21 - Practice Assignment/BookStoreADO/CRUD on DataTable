@@ -1,0 +1,12 @@
+DataSet ds = GetBooksDataSet();
+
+DataTable dt = ds.Tables["Books"];
+
+DataRow row = dt.NewRow();
+
+row["Title"] = "C# Guide";
+row["Author"] = "James";
+row["Price"] = 500;
+row["Quantity"] = 10;
+
+dt.Rows.Add(row);
