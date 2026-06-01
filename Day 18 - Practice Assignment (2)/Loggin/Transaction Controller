@@ -1,0 +1,26 @@
+using Microsoft.AspNetCore.Mvc;
+
+[ServiceFilter(typeof(LoggingFilter))]
+[CustomAuthenticationFilter]
+public class TransactionController : Controller
+{
+    public IActionResult Dashboard()
+    {
+        return View();
+    }
+
+    public IActionResult Transfer()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Transfer(
+        decimal amount)
+    {
+        ViewBag.Message =
+            $"Transfer Successful: {amount}";
+
+        return View();
+    }
+}
