@@ -1,0 +1,10 @@
+using Microsoft.AspNetCore.Mvc;
+
+[CustomAuthorizationFilter("Admin")]
+public class AdminController : Controller
+{
+    public IActionResult Users()
+    {
+        return View();
+    }
+}
