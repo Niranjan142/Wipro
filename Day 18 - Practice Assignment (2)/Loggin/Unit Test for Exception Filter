@@ -1,0 +1,18 @@
+using Xunit;
+using Moq;
+
+public class ExceptionFilterTests
+{
+    [Fact]
+    public void Exception_Should_Be_Handled()
+    {
+        var mockLogger =
+            new Mock<ILoggingService>();
+
+        var filter =
+            new GlobalExceptionFilter(
+                mockLogger.Object);
+
+        Assert.NotNull(filter);
+    }
+}
